@@ -4,8 +4,8 @@ Tomcat Manager Credential Scanner
 
 ## Description
 
-It scans a wordlist of Tomcat Credentials in username:password format. The -f is optional. The default is list.txt
-It saves any credentials found into a text file called creds.txt
+It scans a wordlist of Tomcat Credentials in username:password format. The -f is optional. The default is list.txt.
+It saves any credentials found into a text file called creds.txt.
 
 ### Executing program
 
