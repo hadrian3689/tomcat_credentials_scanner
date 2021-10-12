@@ -57,4 +57,5 @@ def main():
     scanner(url,file)
 
 
-main()
+if __name__ == "__main__":
+    main()
