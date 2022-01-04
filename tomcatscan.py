@@ -17,6 +17,7 @@ def encode(creds):
     return auth
 
 def scanner_nofile(url,file):
+    requests.packages.urllib3.disable_warnings()
     full_url = url + "/manager/html/"
     wordlist_file = open(file,'r')
 
@@ -25,7 +26,7 @@ def scanner_nofile(url,file):
         auth = encode(creds)
         
         auth_header = {"Authorization": auth}
-        req_site = requests.get(full_url,headers=auth_header)
+        req_site = requests.get(full_url,headers=auth_header,verify=False)
     
         if req_site.status_code == 200:
             print("Founds Credentials: ",creds)
@@ -37,6 +38,7 @@ def scanner_nofile(url,file):
     exit()
 
 def scanner_with_file(url,file,output_file):
+    requests.packages.urllib3.disable_warnings()
     full_url = url + "/manager/html/" 
     wordlist_file = open(file,'r')
     
@@ -49,7 +51,7 @@ def scanner_with_file(url,file,output_file):
         auth = encode(creds)
         
         auth_header = {"Authorization": auth}
-        req_site = requests.get(full_url,headers=auth_header)
+        req_site = requests.get(full_url,headers=auth_header,verify=False)
     
         if req_site.status_code == 200:
             print("Founds Credentials: ",creds)
