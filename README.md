@@ -11,7 +11,8 @@ It scans a wordlist of Tomcat Credentials in username:password format.
 * Using python3
 ```
 python3 tomcatscan.py -t http://tomcatsite.blah
-python3 tomcatscan.py -t http://tomcatsite.blah -f list.txt
+python3 tomcatscan.py -t http://tomcatsite.blah -w list.txt
+python3 tomcatscan.py -t http://tomcatsite.blah -w list.txt -o output.txt
 ```
 
 ## Help
