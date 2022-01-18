@@ -16,19 +16,19 @@ class Tomcat_Scanner():
 
     def scanner_nofile(self):
         requests.packages.urllib3.disable_warnings()
-        full_url = self.url + "/manager/html/" 
-        wordlist_file = open(self.wordlist,'r')
+        full_url = self.url + "/manager/html/"
 
-        for creds in wordlist_file:
-            creds = creds.strip()
-            username,password = creds.split(":")
+        with open(self.wordlist) as wordlist_file:
+            for creds in wordlist_file:
+                creds = creds.strip()
+                username,password = creds.split(":")
 
-            req_site = requests.get(full_url,auth=(username,password),verify=False)
-        
-            if req_site.status_code == 200:
-                print("Founds Credentials: " + creds)
-            else:
-                continue
+                req_site = requests.get(full_url,auth=(username,password),verify=False)
+            
+                if req_site.status_code == 200:
+                    print("Founds Credentials: " + creds)
+                else:
+                    continue
         
         wordlist_file.close()
         print("Done!")
@@ -36,29 +36,29 @@ class Tomcat_Scanner():
 
     def scanner_with_file(self):
         requests.packages.urllib3.disable_warnings()
-        full_url = self.url + "/manager/html/" 
-        wordlist_file = open(self.wordlist,'r')
+        full_url = self.url + "/manager/html/"
         
-        creds_found_file = open(self.output_file,"w") 
+        creds_found_file = open(self.output_file,"w")
         creds_found_file.write("Found Credentials:\n")
         creds_found_file.close()
 
-        for creds in wordlist_file:
-            creds = creds.strip()
-            username,password = creds.split(":")
+        with open(self.wordlist) as wordlist_file:
+            for creds in wordlist_file:
+                creds = creds.strip()
+                username,password = creds.split(":")
 
-            req_site = requests.get(full_url,auth=(username,password),verify=False)
-        
-            if req_site.status_code == 200:
-                print("Founds Credentials: " + creds)
-                creds_found_file = open(self.output_file,"a") 
-                creds_found_file.write(creds)
-                creds_found_file.write("\n") 
-            else:
-                continue
+                req_site = requests.get(full_url,auth=(username,password),verify=False)
+            
+                if req_site.status_code == 200:
+                    print("Founds Credentials: " + creds)
+                    creds_found_file = open(self.output_file,"a")
+                    creds_found_file.write(creds)
+                    creds_found_file.write("\n")
+                    creds_found_file.close()
+                else:
+                    continue
         
         wordlist_file.close()
-        creds_found_file.close()
         print("Done! Check your " + self.output_file + " for any passwords found!")
         exit()
 
