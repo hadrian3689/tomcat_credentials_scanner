@@ -32,7 +32,6 @@ class Tomcat_Scanner():
         
         wordlist_file.close()
         print("Done!")
-        exit()
 
     def scanner_with_file(self):
         requests.packages.urllib3.disable_warnings()
@@ -60,7 +59,6 @@ class Tomcat_Scanner():
         
         wordlist_file.close()
         print("Done! Check your " + self.output_file + " for any passwords found!")
-        exit()
 
 if __name__ == "__main__":
     print("Welcome to Tomcat user:password scanner!")
@@ -73,9 +71,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    while True:
-        try:
-            Tomcat_Scanner(args.t,args.w,args.o)
-        except KeyboardInterrupt:
-            print("Bye Bye!")
-            exit()
+    try:
+        Tomcat_Scanner(args.t,args.w,args.o)
+    except KeyboardInterrupt:
+        print("Bye Bye!")
+        exit()
